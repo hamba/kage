@@ -12,7 +12,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/go-zoo/bone v0.0.0-20180910124228-2270ec2a18cc
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
-	github.com/influxdata/influxdb v1.6.4
+	github.com/influxdata/influxdb v1.7.9
 	github.com/joho/godotenv v1.3.0
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
