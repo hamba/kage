@@ -3,7 +3,7 @@ module github.com/msales/kage
 go 1.13
 
 require (
-	github.com/Shopify/sarama v1.19.0
+	github.com/Shopify/sarama v1.24.1
 	github.com/Shopify/toxiproxy v2.1.3+incompatible // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.1.0 // indirect
