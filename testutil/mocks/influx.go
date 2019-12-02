@@ -36,3 +36,9 @@ func (m *MockInfluxClient) Query(q client.Query) (*client.Response, error) {
 func (m *MockInfluxClient) Close() error {
 	return nil
 }
+
+// QueryAsChunk makes an InfluxDB Query on the database. This will fail if using
+// the UDP client.
+func (m *MockInfluxClient) QueryAsChunk(q client.Query) (*client.ChunkedResponse, error) {
+	panic("implement me")
+}

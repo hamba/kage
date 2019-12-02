@@ -1,4 +1,4 @@
-include github.com/msales/make/golang
+include github.com/hamba/make/golang
 
 # Run all benchmarks
 bench:
