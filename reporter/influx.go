@@ -5,9 +5,9 @@ import (
 	"math"
 	"time"
 
+	"github.com/hamba/pkg/log"
 	"github.com/influxdata/influxdb/client/v2"
 	"github.com/msales/kage/store"
-	"gopkg.in/inconshreveable/log15.v2"
 )
 
 // InfluxReporterFunc represents a configuration function for InfluxReporter.
@@ -21,7 +21,7 @@ func Database(db string) InfluxReporterFunc {
 }
 
 // Log configures the logger on an InfluxReporter.
-func Log(log log15.Logger) InfluxReporterFunc {
+func Log(log log.Logger) InfluxReporterFunc {
 	return func(c *InfluxReporter) {
 		c.log = log
 	}
@@ -42,7 +42,7 @@ func Policy(policy string) InfluxReporterFunc {
 }
 
 // Tags configures the additional tags on an InfluxReporter.
-func Tags(tags map[string]string) InfluxReporterFunc {
+func Tags(tags []string) InfluxReporterFunc {
 	return func(c *InfluxReporter) {
 		c.tags = tags
 	}
@@ -54,11 +54,11 @@ type InfluxReporter struct {
 
 	metric string
 	policy string
-	tags   map[string]string
+	tags   []string
 
 	client client.Client
 
-	log log15.Logger
+	log log.Logger
 }
 
 // NewInfluxReporter creates and returns a new NewInfluxReporter.
@@ -94,8 +94,8 @@ func (r InfluxReporter) ReportBrokerOffsets(o *store.BrokerOffsets) {
 				"partition": fmt.Sprint(partition),
 			}
 
-			for key, value := range r.tags {
-				tags[key] = value
+			for i := 0; i < len(r.tags); i += 2 {
+				tags[r.tags[i]] = r.tags[i+1]
 			}
 
 			pt, _ := client.NewPoint(
@@ -138,8 +138,8 @@ func (r InfluxReporter) ReportBrokerMetadata(m *store.BrokerMetadata) {
 				"partition": fmt.Sprint(partition),
 			}
 
-			for key, value := range r.tags {
-				tags[key] = value
+			for i := 0; i < len(r.tags); i += 2 {
+				tags[r.tags[i]] = r.tags[i+1]
 			}
 
 			leaders := 1
@@ -189,8 +189,8 @@ func (r InfluxReporter) ReportConsumerOffsets(o *store.ConsumerOffsets) {
 					"partition": fmt.Sprint(partition),
 				}
 
-				for key, value := range r.tags {
-					tags[key] = value
+				for i := 0; i < len(r.tags); i += 2 {
+					tags[r.tags[i]] = r.tags[i+1]
 				}
 
 				pt, _ := client.NewPoint(

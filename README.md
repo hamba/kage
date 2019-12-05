@@ -47,9 +47,9 @@ Kage can be configured with command line flags and environment variables.
 
 | Flag | Options | Multiple Allowed | Description | Environment Variable |
 | ---- | ------- | ---------------- | ----------- | -------------------- |
-| --log | stdout, file | No | The type of log to use. | KAGE_LOG |
-| --log.file | | No | The path to the file to log to. | KAGE_LOG_FILE |
-| --log.level | debug, info, warn, error | No | The log level to use. | KAGE_LOG_LEVEL |
+| --log.format | logfmt, json | No | The format of logs. | LOG_FORMAT |
+| --log.level | debug, info, error | No | The log level to use. | LOG_LEVEL |
+| --log.tags | | Yes | A list of tags appended to every log. | LOG_TAGS |
 | --kafka.brokers | | Yes | The kafka seed brokers connect to. Format: 'ip:port'. | KAGE_KAFKA_BROKERS |
 | --kafka.ignore-topics | | Yes | The kafka topic patterns to ignore. This may contian wildcards. | KAGE_KAFKA_IGNORE_TOPICS |
 | --kafka.ignore-groups | | Yes | The kafka consumer group patterns to ignore. This may contian wildcards. | KAGE_KAFKA_IGNORE_GROUPS |
@@ -59,7 +59,7 @@ Kage can be configured with command line flags and environment variables.
 | --influx.policy | | No | The retention policy to report statistics under. | KAGE_INFLUX_POLICY |
 | --influx.tags | | Yes | Additional tags to add to the statistics. Format: 'key=value' | KAGE_INFLUX_TAGS |
 | --server | | No | Start the http server. | KAGE_SERVER |
-| --port | | No | The port to bind to for the http server. | KAGE_PORT |
+| --port | | No | The port to bind to for the http server. | PORT |
 
 ##### Multi value environment variables
 

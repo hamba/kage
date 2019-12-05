@@ -1,14 +1,14 @@
 package kafka
 
 import (
-	"gopkg.in/inconshreveable/log15.v2"
+	"github.com/hamba/pkg/log"
 )
 
 // MonitorFunc represents a function that configures the Monitor.
 type MonitorFunc func(c *Monitor)
 
 // Log configures the logger on the Monitor.
-func Log(log log15.Logger) MonitorFunc {
+func Log(log log.Logger) MonitorFunc {
 	return func(c *Monitor) {
 		c.log = log
 	}

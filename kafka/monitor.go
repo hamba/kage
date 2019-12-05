@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/Shopify/sarama"
+	"github.com/hamba/pkg/log"
 	"github.com/msales/kage/store"
 	"github.com/ryanuber/go-glob"
-	"gopkg.in/inconshreveable/log15.v2"
 )
 
 // Broker represents a Kafka Broker.
@@ -28,7 +28,7 @@ type Monitor struct {
 	ignoreTopics []string
 	ignoreGroups []string
 
-	log log15.Logger
+	log log.Logger
 }
 
 // New creates and returns a new Monitor for a Kafka cluster.
@@ -103,7 +103,7 @@ func (m *Monitor) getTopics() map[string]int {
 	// If auto create topics is on, trying to fetch metadata for a missing
 	// topic will recreate it. To get around this we refresh the metadata
 	// before getting topics and partitions.
-	m.client.RefreshMetadata()
+	_ = m.client.RefreshMetadata()
 
 	topics, _ := m.client.Topics()
 
@@ -163,7 +163,7 @@ func (m *Monitor) getBrokerOffsets() {
 		if err != nil {
 			m.log.Error(fmt.Sprintf("cannot fetch offsets from broker %v: %v", brokerID, err))
 
-			brokers[brokerID].Close()
+			_ = brokers[brokerID].Close()
 
 			return
 		}
@@ -180,7 +180,7 @@ func (m *Monitor) getBrokerOffsets() {
 						continue
 					}
 
-					m.log.Warn(fmt.Sprintf("error in OffsetResponse for %s:%v from broker %v: %s", topic, partition, brokerID, offsetResp.Err.Error()))
+					m.log.Error(fmt.Sprintf("error in OffsetResponse for %s:%v from broker %v: %s", topic, partition, brokerID, offsetResp.Err.Error()))
 					continue
 				}
 

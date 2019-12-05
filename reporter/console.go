@@ -28,7 +28,7 @@ func (r ConsoleReporter) ReportBrokerOffsets(o *store.BrokerOffsets) {
 				continue
 			}
 
-			io.WriteString(
+			_, _ = io.WriteString(
 				r.w,
 				fmt.Sprintf(
 					"%s:%d oldest:%d newest:%d available:%d \n",
@@ -51,7 +51,7 @@ func (r ConsoleReporter) ReportBrokerMetadata(m *store.BrokerMetadata) {
 				continue
 			}
 
-			io.WriteString(
+			_, _ = io.WriteString(
 				r.w,
 				fmt.Sprintf(
 					"%s:%d leader:%d replicas:%s isr:%s \n",
@@ -75,7 +75,7 @@ func (r ConsoleReporter) ReportConsumerOffsets(o *store.ConsumerOffsets) {
 					continue
 				}
 
-				io.WriteString(
+				_, _ = io.WriteString(
 					r.w,
 					fmt.Sprintf(
 						"%s %s:%d offset:%d lag:%d \n",

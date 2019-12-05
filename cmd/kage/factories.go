@@ -6,30 +6,27 @@ import (
 	"os"
 	"strings"
 
+	"github.com/hamba/cmd"
+	"github.com/hamba/pkg/log"
 	"github.com/influxdata/influxdb/client/v2"
 	"github.com/msales/kage"
 	"github.com/msales/kage/kafka"
 	"github.com/msales/kage/reporter"
 	"github.com/msales/kage/store"
-	"github.com/msales/kage/utils"
-	"gopkg.in/inconshreveable/log15.v2"
-	"gopkg.in/urfave/cli.v1"
+	"github.com/urfave/cli/v2"
 )
 
 // Application =============================
 
-func newApplication(c *cli.Context) (*kage.Application, error) {
-	logger, err := newLogger(c)
-	if err != nil {
-		return nil, err
-	}
+func newApplication(c *cmd.Context) (*kage.Application, error) {
+	logger := c.Logger()
 
 	memStore, err := store.New()
 	if err != nil {
 		return nil, err
 	}
 
-	reporters, err := newReporters(c, logger)
+	reporters, err := newReporters(c.Context, logger)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +54,7 @@ func newApplication(c *cli.Context) (*kage.Application, error) {
 // Reporters ===============================
 
 // newReporters creates reporters from the config.
-func newReporters(c *cli.Context, logger log15.Logger) (*kage.Reporters, error) {
+func newReporters(c *cli.Context, logger log.Logger) (*kage.Reporters, error) {
 	rs := &kage.Reporters{}
 
 	for _, name := range c.StringSlice(FlagReporters) {
@@ -83,7 +80,7 @@ func newReporters(c *cli.Context, logger log15.Logger) (*kage.Reporters, error) 
 }
 
 // newInfluxReporter create a new InfluxDB reporter.
-func newInfluxReporter(c *cli.Context, logger log15.Logger) (kage.Reporter, error) {
+func newInfluxReporter(c *cli.Context, logger log.Logger) (kage.Reporter, error) {
 	dsn, err := url.Parse(c.String(FlagInflux))
 	if err != nil {
 		return nil, err
@@ -107,34 +104,16 @@ func newInfluxReporter(c *cli.Context, logger log15.Logger) (kage.Reporter, erro
 	}
 	db := strings.Trim(dsn.Path, "/")
 
-	return reporter.NewInfluxReporter(influx,
-		reporter.Database(db),
-		reporter.Metric(c.String(FlagInfluxMetric)),
-		reporter.Policy(c.String(FlagInfluxPolicy)),
-		reporter.Tags(utils.SplitMap(c.StringSlice(FlagInfluxTags), "=")),
-		reporter.Log(logger),
-	), nil
-}
-
-// Logger ==================================
-
-// newLogger creates a new logger from config.
-func newLogger(c *cli.Context) (log15.Logger, error) {
-	lvl, err := log15.LvlFromString(c.String(FlagLogLevel))
+	tags, err := cmd.SplitTags(c.StringSlice(FlagInfluxTags), "=")
 	if err != nil {
 		return nil, err
 	}
 
-	h := log15.StreamHandler(os.Stderr, log15.LogfmtFormat())
-	if c.String(FlagLog) == "file" {
-		h = log15.Must.FileHandler(c.String(FlagLogFile), log15.LogfmtFormat())
-	}
-
-	log := log15.New()
-	log.SetHandler(log15.LvlFilterHandler(
-		lvl,
-		h,
-	))
-
-	return log, nil
+	return reporter.NewInfluxReporter(influx,
+		reporter.Database(db),
+		reporter.Metric(c.String(FlagInfluxMetric)),
+		reporter.Policy(c.String(FlagInfluxPolicy)),
+		reporter.Tags(tags),
+		reporter.Log(logger),
+	), nil
 }

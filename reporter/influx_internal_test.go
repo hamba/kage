@@ -3,8 +3,8 @@ package reporter
 import (
 	"testing"
 
+	"github.com/hamba/logger"
 	"github.com/stretchr/testify/assert"
-	"gopkg.in/inconshreveable/log15.v2"
 )
 
 func TestDatabase(t *testing.T) {
@@ -34,13 +34,13 @@ func TestPolicy(t *testing.T) {
 func TestTags(t *testing.T) {
 	r := &InfluxReporter{}
 
-	Tags(map[string]string{"foo": "bar"})(r)
+	Tags([]string{"foo", "bar"})(r)
 
-	assert.Equal(t, r.tags["foo"], "bar")
+	assert.Equal(t, r.tags[1], "bar")
 }
 
 func TestLog(t *testing.T) {
-	log := log15.New()
+	log := logger.New(nil)
 	r := &InfluxReporter{}
 
 	Log(log)(r)

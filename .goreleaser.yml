@@ -1,0 +1,55 @@
+project_name: kage
+
+builds:
+  - id: kage
+    binary: kage
+    main: ./cmd/kage/
+
+    goos:
+      - darwin
+      - linux
+      - freebsd
+      - openbsd
+      - solaris
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 7
+      - 6
+
+    ignore:
+      - goos: darwin
+        goarch: 386
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^doc:'
+      - '^tests:'
+      - '^test:'
+      - '^chore:'
+
+archives:
+  - id: archive
+    name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    format: tar.gz
+
+dockers:
+  - dockerfile: Dockerfile
+    goos: linux
+    goarch: amd64
+    binaries:
+      - kage
+    builds:
+      - kage
+    image_templates:
+      - "ghcr.io/hamba/kage:latest"
+      - "ghcr.io/hamba/kage:{{ .Tag }}"
+
+release:
+  prerelease: auto

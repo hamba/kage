@@ -3,8 +3,8 @@ package kafka
 import (
 	"testing"
 
+	"github.com/hamba/logger"
 	"github.com/stretchr/testify/assert"
-	"gopkg.in/inconshreveable/log15.v2"
 )
 
 func TestBrokers(t *testing.T) {
@@ -35,7 +35,7 @@ func TestIgnoreTopics(t *testing.T) {
 }
 
 func TestLog(t *testing.T) {
-	log := log15.New()
+	log := logger.New(nil)
 	c := &Monitor{}
 
 	Log(log)(c)

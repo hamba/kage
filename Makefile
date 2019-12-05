@@ -6,7 +6,7 @@ bench:
 .PHONY: bench
 
 # Build the docker image
-docker:
+docker: build
 	docker build -t kage .
 .PHONY: docker
 

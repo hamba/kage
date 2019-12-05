@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# we want one symlink per .json in /etc/kage so that we're spawning them all
+# we want one symlink per .yaml in /etc/kage so that we're spawning them all
 
 set -eu
 
@@ -23,13 +23,13 @@ if test "x$AUTOSTART" = "xnone" ; then
 fi
 
 if test "x$AUTOSTART" = "xall" -o -z "$AUTOSTART" ; then
-        for CONFIG in `cd $CONFIG_DIR; ls *.json 2> /dev/null`; do
-                NAME=${CONFIG%%.json}
+        for CONFIG in `cd $CONFIG_DIR; ls *.yaml 2> /dev/null`; do
+                NAME=${CONFIG%%.yaml}
                 ln -s "$SERVICEFILE" "$WANTDIR/kage@$NAME.service"
         done
 else
         for NAME in $AUTOSTART ; do
-                if test -e $CONFIG_DIR/$NAME.json ; then
+                if test -e $CONFIG_DIR/$NAME.yaml ; then
                         ln -s "$SERVICEFILE" "$WANTDIR/kage@$NAME.service"
                 fi
         done

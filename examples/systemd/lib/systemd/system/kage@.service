@@ -1,5 +1,5 @@
 # the generator puts these where they belong and that in turn 
-# gives you kage@{configuration}.service per {configuration}.json in /etc/kage
+# gives you kage@{configuration}.service per {configuration}.yaml in /etc/kage
 
 [Unit]
 Description=kage monitoring of %i
@@ -10,7 +10,7 @@ ReloadPropagatedFrom=kage.service
 Type=simple
 User=kage
 Group=kage
-ExecStart=/usr/bin/kage --config=/etc/kage/%i.json
+ExecStart=/usr/bin/kage agent --config=/etc/kage/%i.yaml
 ExecReload=/bin/kill -HUP $MAINPID
 WorkingDirectory=/etc/kage
 Restart=on-failure
