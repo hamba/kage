@@ -7,7 +7,7 @@ require (
 	github.com/eapache/go-resiliency v1.2.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/go-zoo/bone v0.0.0-20180910124228-2270ec2a18cc
-	github.com/influxdata/influxdb v1.7.9
+	github.com/influxdata/influxdb v1.8.0
 	github.com/jcmturner/gofork v1.0.0 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.9.3 // indirect
