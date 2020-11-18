@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	"log"
+	"errors"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/hamba/cmd"
@@ -45,14 +46,16 @@ func runServer(c *cli.Context) error {
 		srv := newServer(app)
 		h := http.Server{Addr: ":" + port, Handler: srv}
 		defer func() {
-			h.Shutdown(context.Background())
+			_ = h.Shutdown(context.Background())
 		}()
 		go func() {
 			ctx.Logger().Info("Starting on port " + port)
 			if err := h.ListenAndServe(); err != nil {
-				if err != http.ErrServerClosed {
-					log.Fatal(err)
+				if errors.Is(err, http.ErrServerClosed) {
+					return
 				}
+				ctx.Logger().Error("Server exited with an error", "error", err)
+				os.Exit(1)
 			}
 		}()
 	}

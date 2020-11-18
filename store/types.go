@@ -2,13 +2,13 @@ package store
 
 // BrokerPartitionMetadata represents a brokers partition metadata.
 type BrokerPartitionMetadata struct {
-	Topic               string
-	Partition           int32
-	TopicPartitionCount int
-	Leader              int32
 	Replicas            []int32
 	Isr                 []int32
+	Topic               string
+	TopicPartitionCount int
 	Timestamp           int64
+	Partition           int32
+	Leader              int32
 }
 
 // BrokerMetadata represents a set of topic metadata.

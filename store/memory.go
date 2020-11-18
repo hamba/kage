@@ -46,7 +46,7 @@ func New() (*MemoryStore, error) {
 		for {
 			select {
 			case v := <-m.stateCh:
-				go m.SetState(v)
+				go func() { _ = m.SetState(v) }()
 
 			case <-m.shutdown:
 				return
@@ -67,15 +67,15 @@ func New() (*MemoryStore, error) {
 
 // SetState adds a state into the store.
 func (m *MemoryStore) SetState(v interface{}) error {
-	switch v.(type) {
+	switch val := v.(type) {
 	case *BrokerPartitionOffset:
-		m.addBrokerOffset(v.(*BrokerPartitionOffset))
+		m.addBrokerOffset(val)
 
 	case *ConsumerPartitionOffset:
-		m.addConsumerOffset(v.(*ConsumerPartitionOffset))
+		m.addConsumerOffset(val)
 
 	case *BrokerPartitionMetadata:
-		m.addMetadata(v.(*BrokerPartitionMetadata))
+		m.addMetadata(val)
 
 	default:
 		return errors.New("store: unknown state object")

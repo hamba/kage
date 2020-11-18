@@ -5,17 +5,21 @@ linters:
   enable-all: true
   disable:
     - exhaustive
+    - exhaustivestruct
     - funlen
     - gochecknoglobals
     - gochecknoinits
     - gocognit
-    - gocyclo
     - goerr113
     - gomnd
+    - lll # Try remove later
     - nestif
     - noctx
     - nlreturn
     - scopelint
     - wsl
+    - wrapcheck
     - gofumpt
-    - godox
+linters-settings:
+  maligned:
+    suggest-new: true

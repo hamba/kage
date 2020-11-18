@@ -87,5 +87,5 @@ func (s *Server) writeJSON(w http.ResponseWriter, v interface{}) {
 		return
 	}
 
-	w.Write(data)
+	_, _ = w.Write(data)
 }

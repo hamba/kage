@@ -58,8 +58,8 @@ func (r ConsoleReporter) ReportBrokerMetadata(m *store.BrokerMetadata) {
 					topic,
 					partition,
 					metadata.Leader,
-					strings.Replace(strings.Trim(fmt.Sprint(metadata.Replicas), "[]"), " ", ",", -1),
-					strings.Replace(strings.Trim(fmt.Sprint(metadata.Isr), "[]"), " ", ",", -1),
+					strings.ReplaceAll(strings.Trim(fmt.Sprint(metadata.Replicas), "[]"), " ", ","),
+					strings.ReplaceAll(strings.Trim(fmt.Sprint(metadata.Isr), "[]"), " ", ","),
 				),
 			)
 		}

@@ -5,11 +5,10 @@ import (
 	"os"
 
 	"github.com/hamba/cmd"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
 )
-
-import _ "github.com/joho/godotenv/autoload"
 
 // Flag constants declared for CLI use.
 const (
@@ -36,8 +35,8 @@ var agentCommand = &cli.Command{
 	Usage: "Run the kage agent",
 	Flags: cmd.Flags{
 		&cli.StringFlag{
-			Name:    FlagConfig,
-			Usage:   "The YAML configuration file to configure ",
+			Name:  FlagConfig,
+			Usage: "The YAML configuration file to configure ",
 		},
 
 		&cli.StringSliceFlag{

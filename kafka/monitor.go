@@ -117,7 +117,7 @@ func (m *Monitor) getTopics() map[string]int {
 	return topicMap
 }
 
-// refreshMetadata refreshes the broker metadata
+// refreshMetadata refreshes the broker metadata.
 func (m *Monitor) refreshMetadata(topics ...string) {
 	if err := m.client.RefreshMetadata(topics...); err != nil {
 		m.log.Error(fmt.Sprintf("could not refresh topic metadata: %v", err))

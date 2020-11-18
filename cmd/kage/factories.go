@@ -65,7 +65,6 @@ func newReporters(c *cli.Context, logger log.Logger) (*kage.Reporters, error) {
 				return nil, err
 			}
 			rs.Add(name, r)
-			break
 
 		case "stdout":
 			r := reporter.NewConsoleReporter(os.Stdout)

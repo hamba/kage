@@ -18,7 +18,7 @@ func NewApplication() *Application {
 	return &Application{}
 }
 
-// Close gracefully shuts down the application
+// Close gracefully shuts down the application.
 func (a *Application) Close() {
 	if a.Store != nil {
 		a.Store.Close()
