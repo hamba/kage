@@ -11,6 +11,7 @@ cache:
 
 before_install:
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b $GOPATH/bin ${GOLANGCI_LINT_VERSION}
+  - echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
   - GO111MODULE=off go get -u github.com/mattn/goveralls # Use `go install` in Go1.16
   - go mod download
 
