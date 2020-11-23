@@ -8,7 +8,7 @@ require (
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/hamba/cmd v1.5.1
 	github.com/hamba/logger v1.0.1
-	github.com/hamba/pkg v1.3.1
+	github.com/hamba/pkg v1.4.0
 	github.com/influxdata/influxdb v1.7.9
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.11.3 // indirect
