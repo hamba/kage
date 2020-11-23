@@ -7,7 +7,7 @@ require (
 	github.com/go-zoo/bone v1.3.0
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/hamba/cmd v1.5.1
-	github.com/hamba/logger v1.0.1
+	github.com/hamba/logger v1.1.0
 	github.com/hamba/pkg v1.3.1
 	github.com/influxdata/influxdb v1.7.9
 	github.com/joho/godotenv v1.3.0
