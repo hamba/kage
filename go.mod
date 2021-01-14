@@ -11,7 +11,7 @@ require (
 	github.com/hamba/cmd v1.5.2
 	github.com/hamba/logger v1.1.0
 	github.com/hamba/pkg v1.4.0
-	github.com/influxdata/influxdb v1.7.9
+	github.com/influxdata/influxdb v1.8.3
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.11.3 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
@@ -27,5 +27,4 @@ require (
 	github.com/urfave/cli/v2 v2.3.0
 	golang.org/x/crypto v0.0.0-20201117144127-c1f2f97bffc9 // indirect
 	golang.org/x/net v0.0.0-20201110031124-69a78807bb2b // indirect
-	golang.org/x/tools v0.0.0-20190823170909-c4a336ef6a2f // indirect
 )
