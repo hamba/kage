@@ -11,7 +11,7 @@ require (
 	github.com/hamba/cmd v1.5.2
 	github.com/hamba/logger v1.1.0
 	github.com/hamba/pkg v1.4.0
-	github.com/influxdata/influxdb v1.7.9
+	github.com/influxdata/influxdb v1.8.5
 	github.com/joho/godotenv v1.3.0
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f // indirect
@@ -24,5 +24,4 @@ require (
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/stretchr/testify v1.7.0
 	github.com/urfave/cli/v2 v2.3.0
-	golang.org/x/tools v0.0.0-20190823170909-c4a336ef6a2f // indirect
 )
