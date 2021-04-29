@@ -12,6 +12,7 @@ require (
 	github.com/influxdata/influxdb v1.8.3
 	github.com/joho/godotenv v1.3.0
 	github.com/ryanuber/go-glob v1.0.0
+	github.com/segmentio/kafka-go v0.4.8 // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/urfave/cli/v2 v2.3.0
 )
