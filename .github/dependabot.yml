@@ -1,0 +1,12 @@
+version: 2
+updates:
+- package-ecosystem: gomod
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: github.com/influxdata/influxdb
+    versions:
+    - 1.8.4
+    - 1.8.5
