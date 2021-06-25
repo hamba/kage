@@ -3,7 +3,7 @@ module github.com/msales/kage
 go 1.13
 
 require (
-	github.com/Shopify/sarama v1.29.0
+	github.com/Shopify/sarama v1.29.1
 	github.com/go-zoo/bone v1.3.0
 	github.com/hamba/cmd v1.5.2
 	github.com/hamba/logger v1.1.0
